@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>みんなのチャイルドレシピ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>🍽️ みんなのチャイルドレシピ</h1>
+            </div>
+            <nav class="nav">
+                <div class="nav-buttons">
+                    <button class="btn btn-outline" onclick="showLoginModal()">ログイン</button>
+                    <button class="btn btn-primary" onclick="showRegisterModal()">新規登録</button>
+                </div>
+                <div class="user-info" id="userInfo" style="display: none;">
+                    <span class="user-name">ようこさん</span>
+                    <button class="btn btn-outline" onclick="logout()">ログアウト</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        <div class="container">
+            <!-- ウェルカムメッセージ -->
+            <section class="welcome-section">
+                <h2>子供が喜ぶ美味しいレシピを共有しよう！</h2>
+                <p>偏食の子供も思わず食べたくなる、みんなのアイデアレシピをチェック</p>
+            </section>
+
+            <!-- レシピ一覧 -->
+            <section class="recipes-section">
+                <h3>みんなのレシピ</h3>
+                <div class="recipes-grid">
+                    <!-- レシピカード1 -->
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/FFB6C1/FFFFFF?text=にんじんの甘煮" alt="にんじんの甘煮">
+                        </div>
+                        <div class="recipe-content">
+                            <h4>簡単！にんじんの甘煮</h4>
+                            <p class="recipe-author">投稿者: ママ太郎</p>
+                            <p class="recipe-description">子供が喜ぶ甘い味付けで、にんじん嫌いも克服！</p>
+                            <div class="recipe-stats">
+                                <span class="likes">❤️ 12</span>
+                                <span class="comments">💬 3</span>
+                            </div>
+                            <button class="btn btn-secondary" onclick="showRecipeDetail(1)">詳細を見る</button>
+                        </div>
+                    </div>
+
+                    <!-- レシピカード2 -->
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/87CEEB/FFFFFF?text=ふわふわ卵焼き" alt="ふわふわ卵焼き">
+                        </div>
+                        <div class="recipe-content">
+                            <h4>ふわふわ卵焼き</h4>
+                            <p class="recipe-author">投稿者: パパ花子</p>
+                            <p class="recipe-description">砂糖を入れて甘く仕上げた、子供が大好きな卵焼き</p>
+                            <div class="recipe-stats">
+                                <span class="likes">❤️ 8</span>
+                                <span class="comments">💬 2</span>
+                            </div>
+                            <button class="btn btn-secondary" onclick="showRecipeDetail(2)">詳細を見る</button>
+                        </div>
+                    </div>
+
+                    <!-- レシピカード3 -->
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/FFE4B5/FFFFFF?text=孫が大好き肉じゃが" alt="孫が大好き肉じゃが">
+                        </div>
+                        <div class="recipe-content">
+                            <h4>孫が大好き！肉じゃが</h4>
+                            <p class="recipe-author">投稿者: おばあちゃん</p>
+                            <p class="recipe-description">優しい味付けで孫も喜ぶ、定番の肉じゃが</p>
+                            <div class="recipe-stats">
+                                <span class="likes">❤️ 15</span>
+                                <span class="comments">💬 5</span>
+                            </div>
+                            <button class="btn btn-secondary" onclick="showRecipeDetail(3)">詳細を見る</button>
+                        </div>
+                    </div>
+
+                    <!-- レシピカード4 -->
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/DDA0DD/FFFFFF?text=野菜たっぷりハンバーグ" alt="野菜たっぷりハンバーグ">
+                        </div>
+                        <div class="recipe-content">
+                            <h4>野菜たっぷりハンバーグ</h4>
+                            <p class="recipe-author">投稿者: ママ太郎</p>
+                            <p class="recipe-description">野菜を細かく刻んで混ぜ込んだ、栄養満点ハンバーグ</p>
+                            <div class="recipe-stats">
+                                <span class="likes">❤️ 20</span>
+                                <span class="comments">💬 7</span>
+                            </div>
+                            <button class="btn btn-secondary" onclick="showRecipeDetail(4)">詳細を見る</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 みんなのチャイルドレシピ. 子供の偏食を解決するレシピ共有アプリ</p>
+        </div>
+    </footer>
+
+    <!-- ログインモーダル -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>ログイン</h2>
+            <form class="form">
+                <div class="form-group">
+                    <label for="loginEmail">メールアドレス</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">パスワード</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="login()">ログイン</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 新規登録モーダル -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>新規登録</h2>
+            <form class="form">
+                <div class="form-group">
+                    <label for="registerNickname">ニックネーム</label>
+                    <input type="text" id="registerNickname" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">メールアドレス</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">パスワード</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerProfile">自己紹介（任意）</label>
+                    <textarea id="registerProfile" rows="3"></textarea>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="register()">新規登録</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- レシピ詳細モーダル -->
+    <div id="recipeDetailModal" class="modal">
+        <div class="modal-content large">
+            <span class="close" onclick="closeModal('recipeDetailModal')">&times;</span>
+            <div id="recipeDetailContent">
+                <!-- 動的にコンテンツが挿入される -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
