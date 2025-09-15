@@ -1,24 +1,48 @@
-# README
+## データベース設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Users テーブル
+| Column             | Type    | Options                  |
+|--------------------|---------|--------------------------|
+| name               | string  | null: false              |
+| email              | string  | null: false, unique: true|
+| encrypted_password | string  | null: false              |
+| profile            | text    |                          |
 
-Things you may want to cover:
+- has_many :recipes  
+- has_many :comments  
+- has_many :likes  
 
-* Ruby version
 
-* System dependencies
+### Recipes テーブル
+| Column     | Type       | Options                        |
+|------------|------------|--------------------------------|
+| title      | string     | null: false                   |
+| description| text       | null: false                   |
+| user_id    | references | null: false, foreign_key: true |
 
-* Configuration
+- belongs_to :user  
+- has_many :comments  
+- has_many :likes  
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
+### Comments テーブル
+| Column   | Type       | Options                        |
+|----------|------------|--------------------------------|
+| content  | text       | null: false                   |
+| user_id  | references | null: false, foreign_key: true |
+| recipe_id| references | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user  
+- belongs_to :recipe  
 
-* Deployment instructions
 
-* ...
+
+### Likes テーブル（中間テーブル）
+| Column   | Type       | Options                        |
+|----------|------------|--------------------------------|
+| user_id  | references | null: false, foreign_key: true |
+| recipe_id| references | null: false, foreign_key: true |
+
+- belongs_to :user  
+- belongs_to :recipe  
