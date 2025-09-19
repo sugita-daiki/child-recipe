@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "recipes#index"
   resources :recipes, only: [:index, :new, :create, :show] do
-    resource :likes, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
+    resources :comments, only: :create
+
   end
 
 end
