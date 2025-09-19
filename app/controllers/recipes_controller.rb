@@ -22,6 +22,16 @@ class RecipesController < ApplicationController
     @comment = Comment.new
   end
 
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    if @recipe.user == current_user
+      @recipe.destroy
+      redirect_to recipes_path, notice: 'レシピを削除しました。'
+    else
+      redirect_to recipes_path, alert: '自分のレシピのみ削除できます。'
+    end
+  end
+
   private
 
   def recipe_params

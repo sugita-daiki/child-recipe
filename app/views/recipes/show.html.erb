@@ -30,6 +30,13 @@
           <% end %>
         <% end %>
         <%= link_to "コメント", "#comments", class: "btn btn-secondary" %>
+        
+        <% if user_signed_in? && @recipe.user == current_user %>
+          <%= link_to "削除", recipe_path(@recipe),
+            data: { turbo_method: :delete, confirm: "本当に削除しますか？" },
+            class: "btn btn-danger" %>
+
+        <% end %>
       </div>
       
       <!-- コメントセクション -->

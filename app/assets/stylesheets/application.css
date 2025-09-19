@@ -127,6 +127,23 @@ body {
     color: #87CEEB;
 }
 
+.btn-danger {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+}
+
 /* メインコンテンツ */
 .main {
     padding: 2rem 0;
