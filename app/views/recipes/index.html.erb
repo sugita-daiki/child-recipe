@@ -18,7 +18,7 @@
         <div class="recipe-card">
           <div class="recipe-image">
             <% if recipe.image.attached? %>
-              <%= image_tag recipe.image, alt: recipe.title %>
+              <%=  image_tag recipe.image.variant(resize: '250x150'), class: 'racipe-image' %>
             <% else %>
               <%= image_tag "https://via.placeholder.com/300x200/87CEEB/FFFFFF?text=#{recipe.title}", alt: recipe.title %>
             <% end %>
