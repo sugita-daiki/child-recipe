@@ -3,6 +3,11 @@
   <section class="welcome-section">
     <h2>子供が喜ぶ美味しいレシピを共有しよう！</h2>
     <p>偏食の子供も思わず食べたくなる、みんなのアイデアレシピをチェック</p>
+    <% if user_signed_in? %>
+      <div class="welcome-actions">
+        <%= link_to "新しいレシピを投稿", new_recipe_path, class: "btn btn-primary btn-large" %>
+      </div>
+    <% end %>
   </section>
 
   <!-- レシピ一覧 -->

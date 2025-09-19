@@ -153,6 +153,17 @@ body {
     font-size: 1.1rem;
 }
 
+.welcome-actions {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.btn-large {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    min-width: 200px;
+}
+
 /* レシピセクション */
 .recipes-section h3 {
     color: #4682B4;
