@@ -1,16 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <title>ChildRecipe</title>
+    <title>みんなのチャイルドレシピ</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <!-- ヘッダー -->
+    <header class="header">
+      <div class="container">
+        <div class="logo">
+          <%= link_to root_path do %>
+            <h1>🍽️ みんなのチャイルドレシピ</h1>
+          <% end %>
+        </div>
+        <nav class="nav">
+          <% if user_signed_in? %>
+            <div class="user-info">
+              <span class="user-name"><%= current_user.nickname %>さん</span>
+              <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline" %>
+            </div>
+          <% else %>
+            <div class="nav-buttons">
+              <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline" %>
+              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+      <%= yield %>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2024 みんなのチャイルドレシピ. 子供の偏食を解決するレシピ共有アプリ</p>
+      </div>
+    </footer>
   </body>
 </html>

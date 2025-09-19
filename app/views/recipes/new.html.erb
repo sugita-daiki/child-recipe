@@ -1,0 +1,187 @@
+<div class="container">
+  <div class="recipe-form-container">
+    <h2>新しいレシピを投稿</h2>
+    
+    <%= form_with model: @recipe, local: true, class: "recipe-form" do |form| %>
+      <% if @recipe.errors.any? %>
+        <div class="error-messages">
+          <h3><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h3>
+          <ul>
+            <% @recipe.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      
+      <div class="form-group">
+        <%= form.label :title, "レシピタイトル" %>
+        <%= form.text_field :title, placeholder: "例: 簡単！にんじんの甘煮", required: true %>
+      </div>
+      
+      <div class="form-group">
+        <%= form.label :description, "レシピ詳細" %>
+        <%= form.text_area :description, 
+            placeholder: "【材料】\n・にんじん 1本\n・砂糖 大さじ2\n・醤油 小さじ1\n・水 100ml\n\n【作り方】\n1. にんじんを薄くスライスする\n2. 鍋に材料を全て入れて中火で煮る\n3. にんじんが柔らかくなったら完成！\n\n子供が喜ぶ甘い味付けです。", 
+            rows: 15, required: true %>
+      </div>
+      
+      <div class="form-group">
+        <%= form.label :image_url, "レシピ画像URL（任意）" %>
+        <%= form.url_field :image_url, placeholder: "https://example.com/image.jpg" %>
+        <small class="form-help">画像のURLを入力してください。未入力の場合はデフォルト画像が表示されます。</small>
+      </div>
+      
+      <div class="form-actions">
+        <%= form.submit "レシピを投稿", class: "btn btn-primary" %>
+        <%= link_to "キャンセル", recipes_path, class: "btn btn-outline" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<style>
+.recipe-form-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.recipe-form-container h2 {
+  color: #4682B4;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.recipe-form {
+  margin-top: 1rem;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #4682B4;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #87CEEB;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #4682B4;
+  box-shadow: 0 0 10px rgba(70, 130, 180, 0.3);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 300px;
+  line-height: 1.6;
+}
+
+.form-help {
+  display: block;
+  margin-top: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  min-width: 120px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #87CEEB, #ADD8E6);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #4682B4;
+  border: 2px solid #4682B4;
+}
+
+.btn-outline:hover {
+  background: #4682B4;
+  color: white;
+}
+
+.error-messages {
+  background-color: #ffebee;
+  border: 1px solid #f44336;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  color: #c62828;
+}
+
+.error-messages h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.error-messages ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.error-messages li {
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .recipe-form-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+</style>

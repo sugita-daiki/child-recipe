@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="recipe-detail">
+    <div class="recipe-detail-header">
+      <h2><%= @recipe.title %></h2>
+      <p class="recipe-detail-author">投稿者: <%= @recipe.user.nickname %></p>
+    </div>
+    
+    <div class="recipe-detail-image">
+      <% if @recipe.image_url.present? %>
+        <%= image_tag @recipe.image_url, alt: @recipe.title %>
+      <% else %>
+        <%= image_tag "https://via.placeholder.com/400x300/87CEEB/FFFFFF?text=#{@recipe.title}", alt: @recipe.title %>
+      <% end %>
+    </div>
+    
+    <div class="recipe-detail-content">
+      <p class="recipe-detail-description"><%= @recipe.description %></p>
+      
+      <div class="recipe-detail-stats">
+        <span class="likes">❤️ <%= @recipe.likes.count %></span>
+        <span class="comments">💬 <%= @recipe.comments.count %></span>
+      </div>
+      
+      <div class="recipe-detail-actions">
+        <% if user_signed_in? %>
+          <% if @recipe.liked_by?(current_user) %>
+            <%= link_to "いいね済み", recipe_like_path(@recipe, @recipe.likes.find_by(user: current_user)), method: :delete, class: "btn btn-primary" %>
+          <% else %>
+            <%= link_to "いいね", recipe_likes_path(@recipe), method: :post, class: "btn btn-primary" %>
+          <% end %>
+        <% end %>
+        <%= link_to "コメント", "#comments", class: "btn btn-secondary" %>
+      </div>
+      
+      <!-- コメントセクション -->
+      <div id="comments" class="comments-section">
+        <h3>コメント</h3>
+        <% @recipe.comments.each do |comment| %>
+          <div class="comment">
+            <p class="comment-author"><%= comment.user.nickname %></p>
+            <p class="comment-content"><%= comment.content %></p>
+            <p class="comment-date"><%= comment.created_at.strftime("%Y年%m月%d日 %H:%M") %></p>
+          </div>
+        <% end %>
+        
+        <% if user_signed_in? %>
+          <div class="comment-form">
+            <%= form_with model: [@recipe, @comment], local: true do |form| %>
+              <div class="form-group">
+                <%= form.text_area :content, placeholder: "コメントを入力してください", rows: 3, required: true %>
+              </div>
+              <%= form.submit "コメント投稿", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
