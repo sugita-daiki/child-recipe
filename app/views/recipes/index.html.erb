@@ -28,7 +28,8 @@
             <p class="recipe-author">投稿者: <%= recipe.user.nickname %></p>
             <p class="recipe-description"><%= truncate(recipe.description, length: 100) %></p>
             <div class="recipe-stats">
-              
+              <span class="likes">❤️ <%= recipe.likes.count %></span>
+              <span class="comments">💬 <%= recipe.comments.count %></span>
               
             </div>
             <%= link_to "詳細を見る", recipe_path(recipe), class: "btn btn-secondary" %>
