@@ -6,8 +6,8 @@
     </div>
     
     <div class="recipe-detail-image">
-      <% if @recipe.image_url.present? %>
-        <%= image_tag @recipe.image_url, alt: @recipe.title %>
+      <% if @recipe.image.attached? %>
+        <%= image_tag @recipe.image, alt: @recipe.title %>
       <% else %>
         <%= image_tag "https://via.placeholder.com/400x300/87CEEB/FFFFFF?text=#{@recipe.title}", alt: @recipe.title %>
       <% end %>
