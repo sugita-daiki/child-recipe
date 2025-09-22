@@ -46,3 +46,23 @@
 
 - belongs_to :user  
 - belongs_to :recipe  
+
+
+### Tags テーブル
+| Column | Type   | Options     |
+|--------|--------|-------------|
+| name   | string | null: false, unique: true |
+
+- has_many :recipe_tags  
+- has_many :recipes, through: :recipe_tags  
+
+---
+
+### RecipeTags テーブル（中間テーブル）
+| Column    | Type       | Options                        |
+|-----------|------------|--------------------------------|
+| recipe_id | references | null: false, foreign_key: true |
+| tag_id    | references | null: false, foreign_key: true |
+
+- belongs_to :recipe  
+- belongs_to :tag  
