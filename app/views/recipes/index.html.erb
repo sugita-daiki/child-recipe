@@ -1,14 +1,14 @@
 <div class="container">
   <!-- ウェルカムメッセージ -->
   <section class="welcome-section">
-    <h2>毎日のお弁当作りを楽しくしよう！</h2>
-    <p>忙しい朝でも簡単に作れる、みんなのお弁当アイデアレシピをチェック</p>
+    <h2>子供が喜ぶ美味しいレシピを共有しよう！</h2>
+    <p>偏食の子供も思わず食べたくなる、みんなのアイデアレシピをチェック</p>
     
     <!-- 検索フォーム -->
     <div class="search-form">
       <%= form_with url: recipes_path, method: :get, local: true, class: "search-form-container" do |form| %>
         <div class="search-input-group">
-          <%= form.text_field :search, placeholder: "レシピを検索（例：ハンバーグ、卵焼き、野菜）", 
+          <%= form.text_field :search, placeholder: "レシピを検索（例：ハンバーグ、にんじん、野菜）", 
                               value: params[:search], class: "search-input" %>
           <%= form.submit "🔍 検索", class: "btn btn-primary search-btn" %>
         </div>
