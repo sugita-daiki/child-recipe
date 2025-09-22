@@ -1,6 +1,7 @@
 class CommentChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "some_channel"
+    @recipe = Recipe.find(params[:recipe_id]) # 追記
+    stream_for @recipe # 追記
   end
 
   def unsubscribed

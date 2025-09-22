@@ -52,7 +52,7 @@
         
         <% if user_signed_in? %>
           <div class="comment-form">
-            <%= form_with model: [@recipe, @comment], local: true do |form| %>
+            <%= form_with model: [@recipe, @comment], local: false, id: "comment-form" do |form| %>
               <div class="form-group">
                 <%= form.text_area :content, placeholder: "コメントを入力してください", rows: 3, required: true %>
               </div>

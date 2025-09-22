@@ -1,9 +1,16 @@
 class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
-    return unless @comment.save
+    @recipe = Recipe.find(params[:recipe_id])
 
-    redirect_to recipe_path(params[:recipe_id])
+    respond_to do |format|
+      if @comment.save
+        CommentChannel.broadcast_to @recipe, { comment: @comment, user: @comment.user }
+        format.json { render json: { status: 'success', message: 'コメントを投稿しました' } }
+      else
+        format.json { render json: { status: 'error', errors: @comment.errors.full_messages } }
+      end
+    end
   end
 
   private
