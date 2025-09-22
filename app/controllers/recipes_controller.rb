@@ -1,6 +1,10 @@
 class RecipesController < ApplicationController
   def index
-    @recipes = Recipe.all
+    @recipes = if params[:search].present?
+                 Recipe.search(params[:search]).recent.includes(:user, :likes, :comments)
+               else
+                 Recipe.recent.includes(:user, :likes, :comments)
+               end
   end
 
   def new

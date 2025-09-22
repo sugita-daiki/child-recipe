@@ -11,4 +11,7 @@ class Recipe < ApplicationRecord
   validates :description, presence: true
 
   scope :recent, -> { order(created_at: :desc) }
+  scope :search, lambda { |keyword|
+    where('title LIKE ? OR description LIKE ?', "%#{keyword}%", "%#{keyword}%")
+  }
 end

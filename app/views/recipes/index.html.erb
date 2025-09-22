@@ -3,6 +3,18 @@
   <section class="welcome-section">
     <h2>毎日のお弁当作りを楽しくしよう！</h2>
     <p>忙しい朝でも簡単に作れる、みんなのお弁当アイデアレシピをチェック</p>
+    
+    <!-- 検索フォーム -->
+    <div class="search-form">
+      <%= form_with url: recipes_path, method: :get, local: true, class: "search-form-container" do |form| %>
+        <div class="search-input-group">
+          <%= form.text_field :search, placeholder: "レシピを検索（例：ハンバーグ、卵焼き、野菜）", 
+                              value: params[:search], class: "search-input" %>
+          <%= form.submit "🔍 検索", class: "btn btn-primary search-btn" %>
+        </div>
+      <% end %>
+    </div>
+    
     <% if user_signed_in? %>
       <div class="welcome-actions">
         <%= link_to "新しいレシピを投稿", new_recipe_path, class: "btn btn-primary btn-large" %>
@@ -12,9 +24,18 @@
 
   <!-- レシピ一覧 -->
   <section class="recipes-section">
-    <h3>みんなのレシピ</h3>
-    <div class="recipes-grid">
-      <% @recipes.each do |recipe| %>
+    <% if params[:search].present? %>
+      <div class="search-results-header">
+        <h3>「<%= params[:search] %>」の検索結果</h3>
+        <p class="search-results-count"><%= @recipes.count %>件のレシピが見つかりました</p>
+        <%= link_to "すべてのレシピを表示", recipes_path, class: "btn btn-outline search-clear-btn" %>
+      </div>
+    <% else %>
+      <h3>みんなのレシピ</h3>
+    <% end %>
+    <% if @recipes.any? %>
+      <div class="recipes-grid">
+        <% @recipes.each do |recipe| %>
         <div class="recipe-card">
           <div class="recipe-image">
             <% if recipe.image.attached? %>
@@ -36,6 +57,20 @@
           </div>
         </div>
       <% end %>
-    </div>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <% if params[:search].present? %>
+          <p>「<%= params[:search] %>」に関するレシピが見つかりませんでした。</p>
+          <p>別のキーワードで検索してみてください。</p>
+          <%= link_to "すべてのレシピを表示", recipes_path, class: "btn btn-primary" %>
+        <% else %>
+          <p>まだレシピが投稿されていません。</p>
+          <% if user_signed_in? %>
+            <%= link_to "最初のレシピを投稿", new_recipe_path, class: "btn btn-primary" %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
   </section>
 </div>
