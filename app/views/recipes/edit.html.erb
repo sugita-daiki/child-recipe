@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="recipe-form-container">
+    <h2>お弁当レシピを編集</h2>
+
+    <%= form_with model: @recipe, local: true, multipart: true, class: "recipe-form" do |form| %>
+      <% if @recipe.errors.any? %>
+        <div class="error-messages">
+          <h3><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h3>
+          <ul>
+            <% @recipe.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :title, "レシピタイトル" %>
+        <%= form.text_field :title, required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :description, "レシピ詳細" %>
+        <%= form.text_area :description, rows: 15, required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :image, "レシピ画像（任意）" %>
+        <% if @recipe.image.attached? %>
+          <div class="current-image">
+            <p>現在の画像:</p>
+            <%= image_tag @recipe.image, style: "max-width: 200px; height: auto; margin-bottom: 10px;" %>
+          </div>
+        <% end %>
+        <%= form.file_field :image, accept: "image/*", class: "file-input" %>
+        <small class="form-help">新しい画像を選択すると、現在の画像が置き換わります。JPG、PNG、GIF形式の画像ファイルを選択してください。最大5MBまでアップロード可能です。</small>
+      </div>
+
+      <div class="form-actions">
+        <%= form.submit "レシピを更新", class: "btn btn-primary" %>
+        <%= link_to "キャンセル", recipe_path(@recipe), class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

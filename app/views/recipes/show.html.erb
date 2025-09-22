@@ -24,18 +24,18 @@
       <div class="recipe-detail-actions">
         <% if user_signed_in? %>
           <% if @recipe.liked_by?(current_user) %>
-            <%= link_to "いいね済み", recipe_like_path(@recipe, @recipe.likes.find_by(user: current_user)), method: :delete, class: "btn btn-primary" %>
+            <%= link_to "いいね済み", recipe_like_path(@recipe, @recipe.likes.find_by(user: current_user)), data: { turbo_method: :delete }, class: "btn btn-primary" %>
           <% else %>
-            <%= link_to "いいね", recipe_likes_path(@recipe), method: :post, class: "btn btn-primary" %>
+            <%= link_to "いいね", recipe_likes_path(@recipe), data: { turbo_method: :post }, class: "btn btn-primary" %>
           <% end %>
         <% end %>
         <%= link_to "コメント", "#comments", class: "btn btn-secondary" %>
         
         <% if user_signed_in? && @recipe.user == current_user %>
+          <%= link_to "編集", edit_recipe_path(@recipe), class: "btn btn-secondary" %>
           <%= link_to "削除", recipe_path(@recipe),
             data: { turbo_method: :delete, confirm: "本当に削除しますか？" },
             class: "btn btn-danger" %>
-
         <% end %>
       </div>
       

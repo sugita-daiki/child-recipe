@@ -1,0 +1,90 @@
+<div class="container">
+  <!-- ユーザー情報セクション -->
+  <section class="user-profile-section">
+    <div class="user-profile">
+      <h2>🍱 <%= @user.nickname %>さんのマイページ</h2>
+      <div class="user-stats">
+        <div class="stat-item">
+          <span class="stat-number"><%= @recipes.count %></span>
+          <span class="stat-label">投稿レシピ</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number"><%= @liked_recipes.count %></span>
+          <span class="stat-label">いいねしたレシピ</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 投稿したレシピセクション -->
+  <section class="my-recipes-section">
+    <h3>投稿したレシピ</h3>
+    <% if @recipes.any? %>
+      <div class="recipes-grid">
+        <% @recipes.each do |recipe| %>
+          <div class="recipe-card">
+            <div class="recipe-image">
+              <% if recipe.image.attached? %>
+                <%= image_tag recipe.image, alt: recipe.title %>
+              <% else %>
+                <%= image_tag "https://via.placeholder.com/300x200/87CEEB/FFFFFF?text=#{recipe.title}", alt: recipe.title %>
+              <% end %>
+            </div>
+            <div class="recipe-content">
+              <h4><%= recipe.title %></h4>
+              <p class="recipe-description"><%= truncate(recipe.description, length: 100) %></p>
+              <div class="recipe-stats">
+                <span class="likes">❤️ <%= recipe.likes.count %></span>
+                <span class="comments">💬 <%= recipe.comments.count %></span>
+              </div>
+              <div class="recipe-actions">
+                <%= link_to "詳細を見る", recipe_path(recipe), class: "btn btn-secondary" %>
+                <%= link_to "編集", edit_recipe_path(recipe), class: "btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <p>まだレシピを投稿していません。</p>
+        <%= link_to "新しいレシピを投稿", new_recipe_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </section>
+
+  <!-- いいねしたレシピセクション -->
+  <section class="liked-recipes-section">
+    <h3>いいねしたレシピ</h3>
+    <% if @liked_recipes.any? %>
+      <div class="recipes-grid">
+        <% @liked_recipes.each do |recipe| %>
+          <div class="recipe-card">
+            <div class="recipe-image">
+              <% if recipe.image.attached? %>
+                <%= image_tag recipe.image, alt: recipe.title %>
+              <% else %>
+                <%= image_tag "https://via.placeholder.com/300x200/87CEEB/FFFFFF?text=#{recipe.title}", alt: recipe.title %>
+              <% end %>
+            </div>
+            <div class="recipe-content">
+              <h4><%= recipe.title %></h4>
+              <p class="recipe-author">投稿者: <%= recipe.user.nickname %></p>
+              <p class="recipe-description"><%= truncate(recipe.description, length: 100) %></p>
+              <div class="recipe-stats">
+                <span class="likes">❤️ <%= recipe.likes.count %></span>
+                <span class="comments">💬 <%= recipe.comments.count %></span>
+              </div>
+              <%= link_to "詳細を見る", recipe_path(recipe), class: "btn btn-secondary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <p>まだレシピにいいねしていません。</p>
+        <%= link_to "レシピを探す", root_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </section>
+</div>

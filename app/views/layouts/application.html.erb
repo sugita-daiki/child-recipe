@@ -21,7 +21,7 @@
         <nav class="nav">
           <% if user_signed_in? %>
             <div class="user-info">
-              <span class="user-name"><%= current_user.nickname %>さん</span>
+              <%= link_to "#{current_user.nickname}さん", mypage_path, class: "user-name-link" %>
               <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline" %>
             </div>
           <% else %>
