@@ -5,6 +5,6 @@ test:
   adapter: test
 
 production:
-   adapter: async # 追記  
+  adapter: async # 追記  
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
   channel_prefix: child_recipe_production
