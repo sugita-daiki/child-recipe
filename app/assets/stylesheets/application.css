@@ -594,6 +594,24 @@ body {
     padding: 8px 16px;
 }
 
+/* タグ表示のスタイル */
+.recipe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0.5rem 0;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #87CEEB;
+  color: white;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
     .header .container {

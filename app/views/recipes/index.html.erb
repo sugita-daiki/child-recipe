@@ -47,12 +47,22 @@
           <div class="recipe-content">
             <h4><%= recipe.title %></h4>
             <p class="recipe-author">投稿者: <%= recipe.user.nickname %></p>
-            <p class="recipe-description"><%= truncate(recipe.description, length: 100) %></p>
-            <div class="recipe-stats">
-              <span class="likes">❤️ <%= recipe.likes.count %></span>
-              <span class="comments">💬 <%= recipe.comments.count %></span>
-              
-            </div>
+                <p class="recipe-description"><%= truncate(recipe.description, length: 100) %></p>
+                
+                <!-- タグ表示 -->
+                <% if recipe.tags.any? %>
+                  <div class="recipe-tags">
+                    <% recipe.tags.each do |tag| %>
+                      <span class="tag"><%= tag.name %></span>
+                    <% end %>
+                  </div>
+                <% end %>
+                
+                <div class="recipe-stats">
+                  <span class="likes">❤️ <%= recipe.likes.count %></span>
+                  <span class="comments">💬 <%= recipe.comments.count %></span>
+                  
+                </div>
             <%= link_to "詳細を見る", recipe_path(recipe), class: "btn btn-secondary" %>
           </div>
         </div>

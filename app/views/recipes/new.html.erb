@@ -2,12 +2,12 @@
   <div class="recipe-form-container">
         <h2>新しいレシピを投稿</h2>
     
-    <%= form_with model: @recipe, local: true, multipart: true, class: "recipe-form" do |form| %>
-      <% if @recipe.errors.any? %>
+    <%= form_with model: @recipe_form, url: recipes_path, method: :post, local: true, multipart: true, class: "recipe-form" do |form| %>
+      <% if @recipe_form.errors.any? %>
         <div class="error-messages">
-          <h3><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h3>
+          <h3><%= pluralize(@recipe_form.errors.count, "error") %> prohibited this recipe from being saved:</h3>
           <ul>
-            <% @recipe.errors.full_messages.each do |message| %>
+            <% @recipe_form.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
           </ul>
@@ -30,6 +30,36 @@
         <%= form.label :image, "レシピ画像（任意）" %>
         <%= form.file_field :image, accept: "image/*", class: "file-input" %>
         <small class="form-help">JPG、PNG、GIF形式の画像ファイルを選択してください。最大5MBまでアップロード可能です。</small>
+      </div>
+      
+      <div class="form-group">
+        <%= form.label :tag_ids, "タグ（任意）" %>
+        
+        <!-- 既存タグの選択 -->
+        <div class="existing-tags">
+          <h4>既存のタグから選択</h4>
+          <div class="tag-selection">
+            <% Tag.all.each do |tag| %>
+              <label class="tag-checkbox">
+                <%= form.check_box :tag_ids, { multiple: true }, tag.id, nil %>
+                <span class="tag-label"><%= tag.name %></span>
+              </label>
+            <% end %>
+          </div>
+        </div>
+        
+        <!-- 新しいタグの入力 -->
+        <div class="new-tag-input">
+          <h4>新しいタグを追加</h4>
+          <div class="tag-input-group">
+            <%= form.text_field :new_tag_names, 
+                placeholder: "例: 野菜, 簡単, 子供が好き（カンマ区切りで複数入力可能）", 
+                class: "tag-input" %>
+            <small class="form-help">新しいタグをカンマ区切りで入力してください。例: 野菜, 簡単, 子供が好き</small>
+          </div>
+        </div>
+        
+        <small class="form-help">既存のタグから選択するか、新しいタグを入力してください。</small>
       </div>
       
       <div class="form-actions">
@@ -184,6 +214,86 @@
   margin-bottom: 0.25rem;
 }
 
+/* タグ選択のスタイル */
+.existing-tags,
+.new-tag-input {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+}
+
+.existing-tags h4,
+.new-tag-input h4 {
+  color: #4682B4;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.tag-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.tag-input-group {
+  margin-top: 0.5rem;
+}
+
+.tag-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #87CEEB;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.tag-input:focus {
+  outline: none;
+  border-color: #4682B4;
+  box-shadow: 0 0 10px rgba(70, 130, 180, 0.3);
+}
+
+.tag-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border: 2px solid #87CEEB;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.tag-checkbox:hover {
+  background: #e6f3ff;
+  border-color: #4682B4;
+}
+
+.tag-checkbox input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.tag-checkbox input[type="checkbox"]:checked + .tag-label {
+  color: #4682B4;
+  font-weight: bold;
+}
+
+.tag-checkbox:has(input[type="checkbox"]:checked) {
+  background: #87CEEB;
+  border-color: #4682B4;
+  color: white;
+}
+
+.tag-label {
+  font-size: 0.9rem;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
 @media (max-width: 768px) {
   .recipe-form-container {
     margin: 1rem;
@@ -196,6 +306,20 @@
   
   .btn {
     width: 100%;
+  }
+  
+  .tag-selection {
+    flex-direction: column;
+  }
+  
+  .existing-tags,
+  .new-tag-input {
+    padding: 0.8rem;
+  }
+  
+  .tag-input {
+    font-size: 0.9rem;
+    padding: 10px 12px;
   }
 }
 </style>

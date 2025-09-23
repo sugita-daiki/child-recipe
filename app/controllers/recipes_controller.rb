@@ -8,12 +8,12 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.new
+    @recipe_form = RecipeForm.new
   end
 
   def create
-    @recipe = current_user.recipes.build(recipe_params)
-    if @recipe.save
+    @recipe_form = RecipeForm.new(recipe_form_params)
+    if @recipe_form.save
       redirect_to recipes_path, notice: 'レシピが正常に投稿されました！'
     else
       render :new
@@ -28,15 +28,22 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
-    return unless @recipe.user != current_user
+    return redirect_to recipes_path, alert: '自分のレシピのみ編集できます。' unless @recipe.user == current_user
 
-    redirect_to recipes_path, alert: '自分のレシピのみ編集できます。'
+    @recipe_form = RecipeForm.new(
+      title: @recipe.title,
+      description: @recipe.description,
+      user_id: @recipe.user_id,
+      recipe_id: @recipe.id,
+      tag_ids: @recipe.tags.pluck(:id)
+    )
   end
 
   def update
     @recipe = Recipe.find(params[:id])
     if @recipe.user == current_user
-      if @recipe.update(recipe_params)
+      @recipe_form = RecipeForm.new(recipe_form_params.merge(user_id: @recipe.user_id, recipe_id: @recipe.id))
+      if @recipe_form.update(@recipe)
         redirect_to @recipe, notice: 'レシピを更新しました。'
       else
         render :edit
@@ -58,7 +65,8 @@ class RecipesController < ApplicationController
 
   private
 
-  def recipe_params
-    params.require(:recipe).permit(:title, :description, :image).merge(user_id: current_user.id)
+  def recipe_form_params
+    params.require(:recipe_form).permit(:title, :description, :image, :new_tag_names, :recipe_id,
+                                        tag_ids: []).merge(user_id: current_user.id)
   end
 end

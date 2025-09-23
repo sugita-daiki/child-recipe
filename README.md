@@ -49,9 +49,9 @@
 
 
 ### Tags テーブル
-| Column | Type   | Options     |
-|--------|--------|-------------|
-| name   | string | null: false, unique: true |
+| Column     | Type   | Options     |
+|--------    |--------|-------------|
+| nickname   | string | null: false |
 
 - has_many :recipe_tags  
 - has_many :recipes, through: :recipe_tags  
