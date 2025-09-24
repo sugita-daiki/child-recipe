@@ -1,6 +1,6 @@
 <div class="container">
   <div class="recipe-form-container">
-        <h2>新しいレシピを投稿</h2>
+        <h2>新しいおやつレシピを投稿</h2>
     
     <%= form_with model: @recipe_form, url: recipes_path, method: :post, local: true, multipart: true, class: "recipe-form" do |form| %>
       <% if @recipe_form.errors.any? %>
@@ -16,13 +16,13 @@
       
       <div class="form-group">
         <%= form.label :title, "レシピタイトル" %>
-        <%= form.text_field :title, placeholder: "例: 子供が喜ぶ！ふわふわハンバーグ", required: true %>
+        <%= form.text_field :title, placeholder: "例: 子供が喜ぶ！ふわふわクッキー", required: true %>
       </div>
       
       <div class="form-group">
         <%= form.label :description, "レシピ詳細" %>
         <%= form.text_area :description, 
-            placeholder: "【材料】\n・にんじん 1本\n・砂糖 大さじ2\n・醤油 小さじ1\n・水 100ml\n\n【作り方】\n1. にんじんを薄くスライスする\n2. 鍋に材料を全て入れて中火で煮る\n3. にんじんが柔らかくなったら完成！\n\n子供が喜ぶ甘い味付けです。", 
+            placeholder: "【材料】\n・薄力粉 100g\n・バター 50g\n・砂糖 30g\n・卵 1個\n\n【作り方】\n1. バターを室温で柔らかくする\n2. 砂糖を加えて混ぜる\n3. 卵を加えて混ぜる\n4. 薄力粉を加えて混ぜる\n5. オーブンで15分焼く\n\n子供が喜ぶ甘いクッキーです。", 
             rows: 15, required: true %>
       </div>
       
@@ -63,7 +63,7 @@
       </div>
       
       <div class="form-actions">
-        <%= form.submit "レシピを投稿", class: "btn btn-primary" %>
+        <%= form.submit "おやつレシピを投稿", class: "btn btn-primary" %>
         <%= link_to "キャンセル", recipes_path, class: "btn btn-outline" %>
       </div>
     <% end %>

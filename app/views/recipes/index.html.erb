@@ -1,15 +1,15 @@
 <div class="container">
   <!-- ウェルカムメッセージ -->
   <section class="welcome-section">
-    <h2>子供が喜ぶ美味しいレシピを共有しよう！</h2>
-    <p>偏食の子供も思わず食べたくなる、みんなのアイデアレシピをチェック</p>
+        <h2>子供が喜ぶ美味しいおやつレシピを共有しよう！</h2>
+        <p>手作りおやつで子供の笑顔を増やそう！みんなのアイデアおやつレシピをチェック</p>
     
     <!-- 検索フォーム -->
     <div class="search-form">
       <%= form_with url: recipes_path, method: :get, local: true, class: "search-form-container" do |form| %>
         <div class="search-input-group">
-          <%= form.text_field :search, placeholder: "レシピを検索（例：ハンバーグ、にんじん、野菜）", 
-                              value: params[:search], class: "search-input" %>
+            <%= form.text_field :search, placeholder: "おやつレシピを検索（例：クッキー、ケーキ、お菓子）", 
+                                value: params[:search], class: "search-input" %>
           <%= form.submit "🔍 検索", class: "btn btn-primary search-btn" %>
         </div>
       <% end %>
@@ -31,7 +31,7 @@
         <%= link_to "すべてのレシピを表示", recipes_path, class: "btn btn-outline search-clear-btn" %>
       </div>
     <% else %>
-      <h3>みんなのレシピ</h3>
+        <h3>みんなのおやつレシピ</h3>
     <% end %>
     <% if @recipes.any? %>
       <div class="recipes-grid">

@@ -2,7 +2,7 @@
   <!-- ユーザー情報セクション -->
   <section class="user-profile-section">
     <div class="user-profile">
-      <h2>🍽️ <%= @user.nickname %>さんのマイページ</h2>
+          <h2>🍪 <%= @user.nickname %>さんのマイページ</h2>
       <div class="user-stats">
         <div class="stat-item">
           <span class="stat-number"><%= @recipes.count %></span>
@@ -18,7 +18,7 @@
 
   <!-- 投稿したレシピセクション -->
   <section class="my-recipes-section">
-    <h3>投稿したレシピ</h3>
+    <h3>投稿したおやつレシピ</h3>
     <% if @recipes.any? %>
       <div class="recipes-grid">
         <% @recipes.each do |recipe| %>
@@ -55,7 +55,7 @@
 
   <!-- いいねしたレシピセクション -->
   <section class="liked-recipes-section">
-    <h3>いいねしたレシピ</h3>
+        <h3>いいねしたおやつレシピ</h3>
     <% if @liked_recipes.any? %>
       <div class="recipes-grid">
         <% @liked_recipes.each do |recipe| %>

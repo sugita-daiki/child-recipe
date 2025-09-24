@@ -1,6 +1,6 @@
 <div class="container">
   <div class="recipe-form-container">
-    <h2>レシピを編集</h2>
+    <h2>おやつレシピを編集</h2>
 
     <%= form_with model: @recipe_form, url: recipe_path(@recipe), method: :patch, local: true, multipart: true, class: "recipe-form" do |form| %>
       <% if @recipe_form.errors.any? %>
@@ -67,7 +67,7 @@
       </div>
 
       <div class="form-actions">
-        <%= form.submit "レシピを更新", class: "btn btn-primary" %>
+        <%= form.submit "おやつレシピを更新", class: "btn btn-primary" %>
         <%= link_to "キャンセル", recipes_path, class: "btn btn-secondary" %>
       </div>
     <% end %>
