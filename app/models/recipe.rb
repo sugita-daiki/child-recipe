@@ -11,6 +11,7 @@ class Recipe < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :description, presence: true, length: { maximum: 1000 }
+  validates :image, presence: true
 
   scope :recent, -> { order(created_at: :desc) }
   scope :search, lambda { |keyword|
