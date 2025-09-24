@@ -11,12 +11,11 @@ development:
   database: child_recipe_development
 
 test:
-  <<: *default
-  adapter: mysql2
-  username: root
-  password:
-  host: localhost
-  database: child_recipe_test
+  adapter: sqlite3
+  database: ":memory:"
+  pool: 1
+  timeout: 5000
+  encoding: utf8
 
 production:
   <<: *default

@@ -7,17 +7,19 @@ class RecipeForm
   validates :title, presence: true, length: { maximum: 100 }
   validates :description, presence: true, length: { maximum: 1000 }
   validates :user_id, presence: true
+  validates :image, presence: true
 
   def save
     return false unless valid?
 
     ActiveRecord::Base.transaction do
-      recipe = Recipe.create!(
+      recipe = Recipe.new(
         title: title,
         description: description,
-        user_id: user_id
+        user_id: user_id,
+        image: image
       )
-
+      recipe.save!
       recipe.image.attach(image) if image.present?
 
       # 既存タグの関連付け
@@ -33,7 +35,7 @@ class RecipeForm
           recipe.tags << tag unless recipe.tags.include?(tag)
         end
       end
-
+      recipe.save!
       recipe
     end
   rescue ActiveRecord::RecordInvalid => e
@@ -50,7 +52,8 @@ class RecipeForm
       # レシピの基本情報を更新
       recipe.update!(
         title: title,
-        description: description
+        description: description,
+        image: image
       )
 
       # 画像の更新

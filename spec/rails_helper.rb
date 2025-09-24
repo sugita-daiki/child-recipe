@@ -30,7 +30,8 @@ require 'rspec/rails'
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
-  abort e.to_s.strip
+  puts 'Running pending migrations for test environment...'
+  ActiveRecord::Tasks::DatabaseTasks.migrate
 end
 I18n.locale = 'en'
 RSpec.configure do |config|
@@ -93,3 +94,10 @@ end
 # - If using Rails system tests / capybara, add system specs separately (feature specs)
 
 # End of file
+
+# spec/rails_helper.rb
+
+RSpec.configure do |config|
+  # FactoryBot のメソッドを省略形で使えるようにする
+  config.include FactoryBot::Syntax::Methods
+end
