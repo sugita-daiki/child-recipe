@@ -10,4 +10,5 @@ class User < ApplicationRecord
   has_many :comments
 
   validates :nickname, presence: true
+  validates :profile, presence: true
 end
