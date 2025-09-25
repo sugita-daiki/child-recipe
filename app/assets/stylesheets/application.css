@@ -386,6 +386,11 @@ body {
     padding-top: 2rem;
 }
 
+/* コメント表示エリア */
+#comments-list {
+    margin-bottom: 2rem;
+}
+
 .comments-section h3 {
     color: #4682B4;
     font-size: 1.5rem;

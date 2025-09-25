@@ -29,9 +29,9 @@ consumer.subscriptions.create({
           <p class="comment-content">${data.comment.content}</p>
           <p class="comment-date">${timeString}</p>
         </div>`
-      const comments = document.getElementById("comments")
-      if (comments) {
-        comments.insertAdjacentHTML('beforeend', html)
+      const commentsList = document.getElementById("comments-list")
+      if (commentsList) {
+        commentsList.insertAdjacentHTML('afterbegin', html)
       }
       const commentForm = document.getElementById("comment-form")
       if (commentForm) {

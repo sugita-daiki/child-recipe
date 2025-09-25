@@ -40,16 +40,21 @@
       </div>
       
       <!-- コメントセクション -->
-      <div id="comments" class="comments-section">
+      <div class="comments-section">
         <h3>コメント</h3>
-        <% @recipe.comments.each do |comment| %>
-          <div class="comment">
-            <p class="comment-author"><%= comment.user.nickname %></p>
-            <p class="comment-content"><%= comment.content %></p>
-            <p class="comment-date"><%= comment.created_at.strftime("%Y年%m月%d日 %H:%M") %></p>
-          </div>
-        <% end %>
         
+        <!-- コメント表示エリア -->
+        <div id="comments-list">
+          <% @recipe.comments.each do |comment| %>
+            <div class="comment">
+              <p class="comment-author"><%= comment.user.nickname %></p>
+              <p class="comment-content"><%= comment.content %></p>
+              <p class="comment-date"><%= comment.created_at.strftime("%Y年%m月%d日 %H:%M") %></p>
+            </div>
+          <% end %>
+        </div>
+        
+        <!-- コメント入力フォーム -->
         <% if user_signed_in? %>
           <div class="comment-form">
             <%= form_with model: [@recipe, @comment], local: false, id: "comment-form" do |form| %>
