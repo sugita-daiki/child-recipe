@@ -324,6 +324,46 @@ body {
     line-height: 1.8;
     margin-bottom: 2rem;
     color: #666;
+    white-space: pre-line; /* 改行を保持 */
+}
+
+/* 材料リストのスタイル */
+.recipe-detail-description ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.recipe-detail-description li {
+    background: #F8F9FA;
+    border-left: 4px solid #87CEEB;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* 材料の項目を縦に並べる */
+.recipe-detail-description li::before {
+    content: "• ";
+    color: #4682B4;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+/* 材料リストのレスポンシブ対応 */
+@media (max-width: 768px) {
+    .recipe-detail-description li {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .recipe-detail-description {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
 }
 
 .recipe-detail-stats {
