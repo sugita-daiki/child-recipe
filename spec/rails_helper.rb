@@ -108,3 +108,8 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+RSpec.configure do |config|
+  # request spec で Devise の sign_in / sign_out を使えるようにする
+  config.include Devise::Test::IntegrationHelpers, type: :request
+end
