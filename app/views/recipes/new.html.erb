@@ -27,8 +27,8 @@
       </div>
       
       <div class="form-group">
-        <%= form.label :image, "レシピ画像（任意）" %>
-        <%= form.file_field :image, accept: "image/*", class: "file-input" %>
+        <%= form.label :image, "レシピ画像（必須）" %>
+        <%= form.file_field :image, accept: "image/*", class: "file-input", required: true %>
         <small class="form-help">JPG、PNG、GIF形式の画像ファイルを選択してください。最大5MBまでアップロード可能です。</small>
       </div>
       

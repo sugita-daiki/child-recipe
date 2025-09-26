@@ -4,10 +4,15 @@ class RecipeForm
 
   attr_accessor :title, :description, :image, :user_id, :tag_ids, :new_tag_names, :recipe_id
 
+  def new_record?
+    recipe_id.blank?
+  end
+
   validates :title, presence: true, length: { maximum: 100 }
   validates :description, presence: true, length: { maximum: 1000 }
   validates :user_id, presence: true
-  validates :image, presence: true
+  # 画像は新規作成時のみ必須、編集時は任意
+  validates :image, presence: true, if: :new_record?
 
   def save
     return false unless valid?
@@ -43,7 +48,7 @@ class RecipeForm
     false
   end
 
-  def update(recipe)
+  def update
     return false unless valid?
 
     ActiveRecord::Base.transaction do
@@ -52,11 +57,10 @@ class RecipeForm
       # レシピの基本情報を更新
       recipe.update!(
         title: title,
-        description: description,
-        image: image
+        description: description
       )
 
-      # 画像の更新
+      # 画像の更新（新しい画像が提供された場合のみ）
       recipe.image.attach(image) if image.present?
 
       # タグの更新（既存のタグを全て削除してから新しいタグを追加）

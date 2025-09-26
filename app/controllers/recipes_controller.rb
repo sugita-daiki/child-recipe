@@ -43,10 +43,11 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     if @recipe.user == current_user
       @recipe_form = RecipeForm.new(recipe_form_params.merge(user_id: @recipe.user_id, recipe_id: @recipe.id))
-      if @recipe_form.update(@recipe)
+      if @recipe_form.update
         redirect_to @recipe, notice: 'レシピを更新しました。'
       else
-        render :edit
+        flash.now[:alert] = 'レシピの更新に失敗しました。'
+        render :edit, status: :unprocessable_entity
       end
     else
       redirect_to recipes_path, alert: '自分のレシピのみ編集できます。'
