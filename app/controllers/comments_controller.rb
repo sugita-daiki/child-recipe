@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_recipe
+  before_action :set_comment, only: [:destroy]
+  before_action :ensure_comment_owner, only: [:destroy]
 
   def create
     @comment = Comment.new(comment_params)
@@ -17,10 +19,28 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to @recipe, notice: 'コメントを削除しました' }
+      format.json { render json: { status: 'success', message: 'コメントを削除しました' } }
+    end
+  end
+
   private
 
   def set_recipe
     @recipe = Recipe.find(params[:recipe_id])
+  end
+
+  def set_comment
+    @comment = @recipe.comments.find(params[:id])
+  end
+
+  def ensure_comment_owner
+    return if @comment.user == current_user
+
+    redirect_to @recipe, alert: 'このコメントを削除する権限がありません'
   end
 
   def comment_params

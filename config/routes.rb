@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: "recipes#index"
   resources :recipes, only: [:index, :new, :create, :show, :destroy, :edit, :update] do
     resources :likes, only: [:create, :destroy]
-    resources :comments, only: :create
+    resources :comments, only: [:create, :destroy]
   end
 
   get 'mypage', to: 'users#show'
