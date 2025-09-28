@@ -16,6 +16,18 @@
     <div class="recipe-detail-content">
       <p class="recipe-detail-description"><%= @recipe.description %></p>
       
+      <!-- タグ表示セクション -->
+      <% if @recipe.tags.any? %>
+        <div class="recipe-tags">
+          <h4>タグ</h4>
+          <div class="tag-list">
+            <% @recipe.tags.each do |tag| %>
+              <span class="tag"><%= tag.name %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      
       <div class="recipe-detail-stats">
         <span class="likes">❤️ <%= @recipe.likes.count %></span>
         <span class="comments">💬 <%= @recipe.comments.count %></span>

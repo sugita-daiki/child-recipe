@@ -641,20 +641,37 @@ body {
 
 /* タグ表示のスタイル */
 .recipe-tags {
+  margin-bottom: 1.5rem;
+}
+
+.recipe-tags h4 {
+  color: #4682B4;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+}
+
+.tag-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin: 0.5rem 0;
+  gap: 8px;
 }
 
 .tag {
   display: inline-block;
-  padding: 4px 8px;
-  background: #87CEEB;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #87CEEB, #ADD8E6);
   color: white;
-  border-radius: 12px;
-  font-size: 0.8rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
   font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 /* レスポンシブデザイン */
