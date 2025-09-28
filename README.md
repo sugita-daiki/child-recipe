@@ -55,7 +55,8 @@ https://child-recipe.onrender.com
 
 
 ## データベース設計
-   ![ER図](/images/child-recipe.png)
+![child-recipe](public/images/child-recipe.png)
+
 
 
 ### Users テーブル
