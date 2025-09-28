@@ -45,8 +45,18 @@ https://child-recipe.onrender.com
 
 ## 実装した機能についての画像やGIFおよびその説明
 - 新規登録 https://gyazo.com/7e74ab3b938403c70734548375cb162d.gif
--
+- レシピ新規投稿 https://gyazo.com/2e777520ad2d4340cbe328e1b42d0a1a.gif
+- レシピ検索 https://gyazo.com/2018d4171976c03001acca81dcf8d153.gif
+- コメント機能 https://gyazo.com/bbc15108e40227d9d91581202d2b5bcc.gif
+- いいね機能 https://gyazo.com/9fcb167d637d1fb4c5a86f3520a97aa9.gif
+
+## 画面遷移図
+![画面遷移図](/images/desplay.png)
+
+
 ## データベース設計
+   ![ER図](/images/child-recipe.png)
+
 
 ### Users テーブル
 | Column             | Type    | Options                  |
