@@ -51,7 +51,7 @@ https://child-recipe.onrender.com
 - いいね機能 https://gyazo.com/9fcb167d637d1fb4c5a86f3520a97aa9.gif
 
 ## 画面遷移図
-![画面遷移図](/images/desplay.png)
+![画面遷移図](public/images/display.png)
 
 
 ## データベース設計
