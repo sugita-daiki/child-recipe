@@ -9,30 +9,30 @@
 https://child-recipe.onrender.com
 
 ## テスト用アカウント
-・Basic認証ID: sugita3549
-・Basic認証パスワード: 1265
-・メールアドレス: test.2025@test.com
-・パスワード: sample123
+- Basic認証ID: sugita3549
+- Basic認証パスワード: 1265
+- メールアドレス: test.2025@test.com
+- パスワード: sample123
 
 ## 利用方法
 - レシピ投稿・編集・削除
-1.トップページ(一覧ページ)のヘッダーからユーザー登録をします。
-2.新しいレシピ投稿ボタンから、レシピタイトル、レシピ詳細、レシピ画像、タグを入力してレシピ投稿します。
-3.レシピカードの詳細を見るボタンから、詳細ページに遷移します。
-4.編集ボタンを押すと編集ページに遷移し、変更したいレシピタイトル、レシピ詳細、レシピ画像、タグを編集した後、おやつレシピを更新ボタンを押すと
-  レシピを更新(編集)できます。
-5.詳細ページの削除ボタンから、レシピを削除できます。
+- 1.トップページ(一覧ページ)のヘッダーからユーザー登録をします。
+- 2.新しいレシピ投稿ボタンから、レシピタイトル、レシピ詳細、レシピ画像、タグを入力してレシピ投稿します。
+- 3.レシピカードの詳細を見るボタンから、詳細ページに遷移します。
+- 4.編集ボタンを押すと編集ページに遷移し、変更したいレシピタイトル、レシピ詳細、レシピ画像、タグを編集した後、おやつレシピを更新ボタンを押すと
+-   レシピを更新(編集)できます。
+- 5.詳細ページの削除ボタンから、レシピを削除できます。
 
 - レシピ検索
-1.トップページ(一覧ページ)の検索フォームにキーワードを入力し、検索ボタンを押すと、キーワード関連のレシピが一覧に表示されます。
+- 1.トップページ(一覧ページ)の検索フォームにキーワードを入力し、検索ボタンを押すと、キーワード関連のレシピが一覧に表示されます。
 
 - コメント投稿
-1.レシピカードの詳細を見るボタンから、詳細ページに遷移します。
-2.コメントフォームにコメントを入力し、コメント投稿ボタンを押すと、コメント一覧に表示されます。
+- 1.レシピカードの詳細を見るボタンから、詳細ページに遷移します。
+- 2.コメントフォームにコメントを入力し、コメント投稿ボタンを押すと、コメント一覧に表示されます。
 
 - いいね機能
-1.レシピカードの詳細を見るボタンから、詳細ページに遷移します。
-２.詳細ページのいいねボタンを押すといいねできます。
+- 1.レシピカードの詳細を見るボタンから、詳細ページに遷移します。
+- 2.詳細ページのいいねボタンを押すといいねできます。
 
 ## アプリケーションを作成した背景
 - 子どものおやつ作りは、何を作ったら良いか悩みやすく、中にはアレルギーへの配慮が必要な子供もいます。
@@ -50,120 +50,34 @@ https://child-recipe.onrender.com
 - コメント機能 https://gyazo.com/bbc15108e40227d9d91581202d2b5bcc.gif
 - いいね機能 https://gyazo.com/9fcb167d637d1fb4c5a86f3520a97aa9.gif
 
-## 画面遷移図
-![画面遷移図](public/images/display.png)
-
+## 実装予定の機能
+- フォロー機能
+- 管理者機能（不適切投稿の削除）
 
 ## データベース設計
 ![child-recipe](public/images/child-recipe.png)
 
+## 画面遷移図
+![画面遷移図](public/images/display.png)
 
 
-### Users テーブル
-| Column             | Type    | Options                  |
-|--------------------|---------|--------------------------|
-| nickname           | string  | null:false               |
-| email              | string  | null: false, unique: true|
-| encrypted_password | string  | null: false              |
-| profile            | text    |                          |
+## 開発環境
+- フロントエンド     HTML,CSS,JavaScript
+- バックエンド       Ruby on Rails
+- インフラ.         Render
+- テキストエディタ   Visual Studio Code
+- タスク管理.       GitHub
 
-- has_many :recipes  
-- has_many :comments  
-- has_many :likes  
+## ローカルでの動作方法
+以下のコマンドを順に実行
+ % git clone https://github.com/sugita-daiki/child-recipe
+ % cd child-recipe
+ % bundle install
+ % rails db:create
+ % rails db:migrate
 
+## 工夫したポイント
 
-### Recipes テーブル
-| Column     | Type       | Options                        |
-|------------|------------|--------------------------------|
-| title      | string     | null: false                    |
-| description| text       | null: false                    |
-| user_id    | references | null: false, foreign_key: true |
-
-- belongs_to :user  
-- has_many :comments  
-- has_many :likes  
-
-
-
-### Comments テーブル
-| Column   | Type       | Options                        |
-|----------|------------|--------------------------------|
-| content  | text       | null: false                    |
-| user_id  | references | null: false, foreign_key: true |
-| recipe_id| references | null: false, foreign_key: true |
-
-- belongs_to :user  
-- belongs_to :recipe  
-
-
-
-### Likes テーブル（中間テーブル）
-| Column   | Type       | Options                        |
-|----------|------------|--------------------------------|
-| user_id  | references | null: false, foreign_key: true |
-| recipe_id| references | null: false, foreign_key: true |
-
-- belongs_to :user  
-- belongs_to :recipe  
-
-
-### Tags テーブル
-| Column     | Type   | Options     |
-|------------|--------|-------------|
-| name       | string | null: false |
-
-- has_many :recipe_tags  
-- has_many :recipes, through: :recipe_tags  
-
----
-
-### RecipeTags テーブル（中間テーブル）
-| Column    | Type       | Options                        |
-|-----------|------------|--------------------------------|
-| recipe_id | references | null: false, foreign_key: true |
-| tag_id    | references | null: false, foreign_key: true |
-
-- belongs_to :recipe  
-- belongs_to :tag
-
-## セットアップ
-
-### 必要な環境
-- Ruby 3.0以上
-- Rails 7.0以上
-- PostgreSQL
-
-### インストール手順
-
-1. リポジトリをクローン
-```bash
-git clone <repository-url>
-cd child-recipe
-```
-
-2. 依存関係をインストール
-```bash
-bundle install
-```
-
-3. データベースのセットアップ
-```bash
-rails db:create
-rails db:migrate
-```
-
-4. サーバーを起動
-```bash
-rails server
-```
-
-## テスト
-
-テストを実行する場合：
-```bash
-bundle exec rspec
-```
-
-## ライセンス
-
-このプロジェクトはMITライセンスの下で公開されています。  
+- レシピ投稿・編集・削除・検索・コメント・いいね・ユーザー管理といった「最低限必要な機能」を実装しました。
+- コメント・いいね機能を導入することで、ユーザー同士の交流やモチベーション向上を狙いました。
+- マイページで「自分の投稿一覧」「いいねしたレシピ一覧」を確認できる仕組みを作りました。
