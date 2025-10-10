@@ -680,11 +680,11 @@ body {
 
 .tag {
   display: inline-block;
-  padding: 4px 8px;
+  padding: 3px 6px;
   background: linear-gradient(135deg, #87CEEB, #ADD8E6);
   color: white;
   border-radius: 12px;
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   font-weight: bold;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
